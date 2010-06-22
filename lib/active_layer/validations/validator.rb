@@ -54,7 +54,6 @@ module ActiveLayer
           end
         end
         
-
       end
       
       

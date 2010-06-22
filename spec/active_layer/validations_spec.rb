@@ -15,23 +15,38 @@ module ActiveLayer
         subject = NameValidator.new(invalid_person)
         subject.should be_invalid
       end
-      it "will call valid? on the underlying object" do
-        pending("figure this out")
-        user = Admin.new
-        subject = NameValidator.new(user)
-        user.should_receive(:valid?)
-        subject.valid?
-      end
-      it "should expose the errors on the validator" do
-        subject = NameValidator.new(invalid_person)
-        subject.valid?
-        subject.errors[:name].should be_present
-      end
-      it "should also exposes the errors on the object if it has error support" do
-        user = Admin.new
-        subject = NameValidator.new(user)
-        subject.valid?
-        user.errors[:name].should be_present
+      context "when the base object has validations" do
+        it "will call valid? on the underlying object" do
+          user = Admin.new
+          subject = NameValidator.new(user)
+          user.should_receive(:valid?)
+          subject.valid?
+        end
+        it "will propogate up the errors on the base object" do
+          user = UserWithValidations.new
+          subject = NameValidator.new(user)
+          subject.valid?
+          subject.errors[:email].should be_present
+          subject.errors[:name].should be_present
+        end
+        it "will keep all the errors on the base object" do
+          user = UserWithValidations.new
+          subject = NameValidator.new(user)
+          subject.valid?
+          user.errors[:email].should be_present
+          user.errors[:name].should be_present
+        end
+        it "should expose the errors on the validator" do
+          subject = NameValidator.new(invalid_person)
+          subject.valid?
+          subject.errors[:name].should be_present
+        end
+        it "should also exposes the errors on the object if it has error support" do
+          user = Admin.new
+          subject = NameValidator.new(user)
+          subject.valid?
+          user.errors[:name].should be_present
+        end
       end
     end
   

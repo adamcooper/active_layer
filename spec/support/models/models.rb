@@ -26,6 +26,12 @@ class User
   test_method :save
 end
 
+class UserWithValidations < User
+  validates_presence_of :email
+end
+
+
+
 class Person < Struct.new(:name, :email)
 end
 
