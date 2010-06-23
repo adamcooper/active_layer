@@ -43,5 +43,13 @@ module ActiveLayer
         subject.save.should == 'magic'
       end
     end
+    describe "save!" do
+      it "should raise an error if it is not valid" do
+        saver.save = false
+        expect {
+          subject.save!
+        }.to raise_error(ActiveLayer::RecordInvalid)
+      end
+    end
   end
 end

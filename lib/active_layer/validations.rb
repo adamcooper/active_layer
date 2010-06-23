@@ -43,8 +43,9 @@ module ActiveLayer
 
       def valid?(*)
         _run_validation_callbacks do
-          result = super
+          result = nil
           keep_errors { active_layer_object.valid? } if active_layer_object.respond_to?(:valid?) && !_validator
+          keep_errors { result = super }
           errors.empty? && result
         end
       end

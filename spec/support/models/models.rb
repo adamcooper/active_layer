@@ -9,8 +9,8 @@ module MethodTester
         attr_accessor :#{ivar_name}, :#{ivar_name}_called
 
         def #{name}
-          #{ivar} = true
-          #{ivar_called}.nil? ? true : #{ivar}
+          #{ivar_called} = true
+          #{ivar}.nil? ? true : #{ivar}
         end
       EOS
     end

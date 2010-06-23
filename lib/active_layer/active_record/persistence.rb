@@ -1,15 +1,10 @@
-require 'activerecord'
+require 'active_record'
 
 module ActiveLayer
   module ActiveRecord
     # override the initialize because the submodels should handle their own translations
     # This will allow drop in compatibility with existing functionality
-    class RecordInvalidError < ::ActiveRecord::RecordInvalidError
-      attr_reader :record
-      def initialize(record)
-        @record = record
-        super(@record.errors.full_messages.join(", "))
-      end
+    class RecordInvalid < ::ActiveRecord::RecordInvalid
     end
 
     module Persistence
@@ -19,7 +14,7 @@ module ActiveLayer
 
         def save!
           unless save
-            raise RecordInvalidError.new(self)
+            raise RecordInvalid.new(self)
           end
         end
 

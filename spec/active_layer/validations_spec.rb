@@ -138,6 +138,7 @@ module ActiveLayer
         end
         it "should run the after callback" do
           admin.name = 'name'
+          admin.email = 'email'
           subject.valid?
           admin.after.should == 1
         end

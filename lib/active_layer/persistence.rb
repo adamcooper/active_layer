@@ -31,7 +31,7 @@ module ActiveLayer
       
       def save!
         unless save
-          raise RecordInvalidError.new(self)
+          raise RecordInvalid.new(self)
         end
       end
       
@@ -58,11 +58,12 @@ module ActiveLayer
     end
   end
 
-  class RecordInvalidError < RuntimeError
+  class RecordInvalid < RuntimeError
     attr_reader :record
     def initialize(record)
       @record = record
-      super(@record.errors.full_messages.join(", "))
+      message = record.respond_to?(:errors) ? @record.errors.full_messages.join(", ") : "An error saving #{record.class.name}"
+      super(message)
     end
   end
 end
