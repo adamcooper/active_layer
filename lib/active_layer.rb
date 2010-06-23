@@ -1,6 +1,6 @@
 require 'active_support'
 require 'active_model'
-require 'active_layer/version'
+require 'active_layer/version' unless defined?(ActiveLayer::VERSION)
 
 module ActiveLayer
   autoload :ActiveRecord, 'active_layer/active_record'
