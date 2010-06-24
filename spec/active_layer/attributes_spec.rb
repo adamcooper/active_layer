@@ -28,6 +28,14 @@ module ActiveLayer
         active_object.email.should == 'email address'
       end
     end
+    describe "active_layer_setting_attributes" do
+      subject { ProtectedAttributes.new(active_object) }
+      it "should properly set the attributes" do
+        subject.active_layer_attributes_setting(:name => 'new name', :email => 'new address')
+        active_object.name.should == 'new name'
+        active_object.email.should == 'email address'
+      end
+    end
   end
 
 end

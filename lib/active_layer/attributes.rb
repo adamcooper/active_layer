@@ -49,7 +49,7 @@ module ActiveLayer
       
       # override persistence saving to pull in the guard functionality
       def active_layer_attributes_setting(new_attributes)
-        attributes = new_attributes
+        self.attributes = new_attributes
       end
       
       
