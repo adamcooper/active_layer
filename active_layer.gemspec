@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = "active_layer"
 
   # If you have other dependencies, add them here
-  s.add_dependency "activesupport", "~> 3.0.0.beta4"
-  s.add_dependency "activemodel", "~> 3.0.0.beta4"
+  s.add_dependency "activesupport", "~> 3.0.0"
+  s.add_dependency "activemodel", "~> 3.0.0"
 
   # If you need to check in files that aren't .rb files, add them here
   s.files        = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]

@@ -1,5 +1,6 @@
 class NameValidator
   include ActiveLayer::Validations
+  layers :person
   validates :name, :presence => true
 end
 

@@ -8,6 +8,19 @@ module ActiveLayer
       attr_writer :active_layer_object
     end
     
+    module ClassMethods
+      # Provides convenient access to the active_layer_object
+      def layers(*names)
+        Array.wrap(names).each do |name| 
+          class_eval <<-EOS
+            def #{name}
+              @active_layer_object
+            end
+          EOS
+        end
+      end
+    end
+    
     module InstanceMethods
       def initialize(*args, &block)
         self.active_layer_object = args.first

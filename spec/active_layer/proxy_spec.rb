@@ -11,5 +11,9 @@ module ActiveLayer
       subject = NameValidator.new(valid_person)
       subject.respond_to?(:name).should be_true
     end
+    it "returns the object when the layer method is called" do
+      subject = NameValidator.new(valid_person)
+      subject.person.should == valid_person
+    end
   end
 end
