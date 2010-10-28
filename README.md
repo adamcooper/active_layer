@@ -1,8 +1,9 @@
 # ActiveLayer
 
-ActiveLayer provides validations, attribute filtering, and persistence in a layer sitting on top of a model.
+ActiveLayer provides a simple way to apply a set of validations, attribute filtering to your models. 
 
-This was born out of frustration with overly complex ActiveRecord validations and model contortions.
+ActiveRecord and other ORM validations are great for simple/ and relatively complex scenarios but they can very quickly become overloaded.  ActiveLayer takes the approach that you might not want to have 'all' your validations in the model all the time.  You might want to have a different set of accessible attributes for different classes of users.
+
 
 # Quick Example
 
@@ -44,6 +45,8 @@ This was born out of frustration with overly complex ActiveRecord validations an
 # ActiveLayer::Proxy
 
 This module provides the ability to delegate method calls down to the object and typically you would not use this element directly.  However, it does provide one key method *active__layer__object* which provides access to the underlying object/model.  This may be necessary in certain cases.
+
+This module also brings in the *layers* method which provides a friendly accessor for the *active_layer_object*
 
 # ActiveLayer::Validations
 
