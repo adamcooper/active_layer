@@ -68,8 +68,8 @@ module ActiveLayer
     end
   
     describe "ComplexValidator" do
-      subject { ComplexValidator.new(complex) }
-      let(:complex) { Complex.new }
+      subject { ComplexModelValidator.new(complex) }
+      let(:complex) { ComplexModel.new }
       let(:user) { Admin.new }
       let(:users) { [user, Admin.new]}
     

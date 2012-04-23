@@ -20,8 +20,6 @@ end
 class User
   include ActiveModel::Validations
   attr_accessor :email, :name, :address
-
-
   extend MethodTester
   test_method :save
 end
@@ -29,8 +27,6 @@ end
 class UserWithValidations < User
   validates_presence_of :email
 end
-
-
 
 class Person < Struct.new(:name, :email)
 end
@@ -41,15 +37,14 @@ class Admin
   def initialize(*)
     @before = 0
     @after = 0
-  end
-    
+  end 
 end
 
 class AdminNoError
   attr_accessor :name, :email
 end
 
-class Complex
+class ComplexModel
   attr_accessor :address, :users, :email, :name
 end 
 
@@ -58,11 +53,11 @@ class SavingObject
   extend MethodTester
   test_method :save, :valid?
 end
+
 class FailingObject
   extend MethodTester
   test_method :save
   def initialize
     @save = false
   end
-
 end
