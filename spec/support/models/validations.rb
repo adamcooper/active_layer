@@ -10,7 +10,7 @@ class EmailValidator
   validates_with NameValidator
 end
 
-class ComplexValidator
+class ComplexModelValidator
   include ActiveLayer::Validations
   validates :address, :presence => true
   validates_with EmailValidator
