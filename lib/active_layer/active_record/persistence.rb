@@ -9,15 +9,11 @@ module ActiveLayer
 
     module Persistence
       extend ActiveSupport::Concern
-      
-      module InstanceMethods
 
-        def save!
-          unless save
-            raise RecordInvalid.new(self)
-          end
+      def save!
+        unless save
+          raise RecordInvalid.new(self)
         end
-
       end
     end
   end

@@ -29,30 +29,25 @@ module ActiveLayer
       end
       
     end
-    
-    module InstanceMethods
 
-      def attributes=(new_attributes)
-        return if new_attributes.nil?
-        attributes = new_attributes.stringify_keys
+    def attributes=(new_attributes)
+      return if new_attributes.nil?
+      attributes = new_attributes.stringify_keys
 
-        safe_attributes = if accessible_attributes.nil? 
-          attributes
-        else
-          attributes.reject { |key, value| !accessible_attributes.include?(key.gsub(/\(.+/, "")) }
-        end
-        
-        safe_attributes.each do |k, v|
-          respond_to?(:"#{k}=") ? send(:"#{k}=", v) : raise(UnknownAttributeError, "unknown attribute: #{k}")
-        end
+      safe_attributes = if accessible_attributes.nil?
+        attributes
+      else
+        attributes.reject { |key, value| !accessible_attributes.include?(key.gsub(/\(.+/, "")) }
       end
-      
-      # override persistence saving to pull in the guard functionality
-      def active_layer_attributes_setting(new_attributes)
-        self.attributes = new_attributes
+
+      safe_attributes.each do |k, v|
+        respond_to?(:"#{k}=") ? send(:"#{k}=", v) : raise(UnknownAttributeError, "unknown attribute: #{k}")
       end
-      
-      
-    end # InstanceMethods
+    end
+
+    # override persistence saving to pull in the guard functionality
+    def active_layer_attributes_setting(new_attributes)
+      self.attributes = new_attributes
+    end
   end # Attributes
 end # ActiveLayer
