@@ -49,7 +49,7 @@ module ActiveLayer
     def merge_errors(errors_to_merge_in, prefix = nil)
       errors_to_merge_in.each do |child_attribute, message|
         attribute = "#{prefix}#{child_attribute}"
-        errors[attribute] << message
+        errors[attribute] << message unless message.nil? || message.empty?
         errors[attribute].uniq!
       end
     end
