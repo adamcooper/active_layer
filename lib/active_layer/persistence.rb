@@ -17,44 +17,41 @@ module ActiveLayer
   module Persistence
     extend ActiveSupport::Concern
     include ActiveLayer::Proxy
-    
-    module InstanceMethods
-      def save
-        valid = self.respond_to?(:valid?, false) ? valid? : true
 
-        if valid
-          active_layer_save
-        else
-          false
-        end
-      end
-      
-      def save!
-        unless save
-          raise RecordInvalid.new(self)
-        end
-      end
-      
-      def update_attributes(new_attributes)
-        active_layer_attributes_setting(new_attributes)
-        save
-      end
+    def save
+      valid = self.respond_to?(:valid?, false) ? valid? : true
 
-      def update_attributes!(new_attributes)
-        active_layer_attributes_setting(new_attributes)
-        save!
+      if valid
+        active_layer_save
+      else
+        false
       end
+    end
 
-      # hook method to override saving behaviour
-      def active_layer_save
-        active_layer_object.save
+    def save!
+      unless save
+        raise RecordInvalid.new(self)
       end
-      
-      # another hook method to control attributes=
-      def active_layer_attributes_setting(new_attributes)
-        active_layer_object.attributes = new_attributes
-      end
-      
+    end
+
+    def update_attributes(new_attributes)
+      active_layer_attributes_setting(new_attributes)
+      save
+    end
+
+    def update_attributes!(new_attributes)
+      active_layer_attributes_setting(new_attributes)
+      save!
+    end
+
+    # hook method to override saving behaviour
+    def active_layer_save
+      active_layer_object.save
+    end
+
+    # another hook method to control attributes=
+    def active_layer_attributes_setting(new_attributes)
+      active_layer_object.attributes = new_attributes
     end
   end
 
