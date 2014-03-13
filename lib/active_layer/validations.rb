@@ -41,15 +41,15 @@ module ActiveLayer
 
     # Private: Adds the passed in errors to the validator instance errors
     #
-    # errors_to_merge_in - a hash of errors eg {:name => 'must be present'}
+    # errors_to_merge_in - a hash of errors eg {:name => ['must be present']}
     # prefix - optional string to prepend to error attribute's name
     #
     # Return value not used
 
     def merge_errors(errors_to_merge_in, prefix = nil)
-      errors_to_merge_in.each do |child_attribute, message|
+      errors_to_merge_in.each do |child_attribute, messages|
         attribute = "#{prefix}#{child_attribute}"
-        errors[attribute] << message unless message.nil? || message.empty?
+        errors[attribute].concat(Array(messages))
         errors[attribute].uniq!
       end
     end
